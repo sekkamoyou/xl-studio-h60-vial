@@ -1,0 +1,4 @@
+BOARD = STM32_F103_STM32DUINO
+MCU_LDSCRIPT = h60_plum
+EEPROM_DRIVER = wear_leveling
+WEAR_LEVELING_DRIVER = embedded_flash

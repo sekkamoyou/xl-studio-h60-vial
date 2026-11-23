@@ -1,0 +1,40 @@
+--- a/quantum/via.c
++++ b/quantum/via.c
+@@ -57,6 +57,11 @@
+ #include "quantum/nvm/eeprom/nvm_eeprom_eeconfig_internal.h"
+ #include "quantum/nvm/eeprom/nvm_eeprom_via_internal.h"
+ 
++// Modified in November 2026 to allow a stable identifier for compatible H60 releases.
++#ifndef VIAL_EEPROM_BUILD_ID
++#    define VIAL_EEPROM_BUILD_ID BUILD_ID
++#endif
++
+ #ifdef VIAL_ENABLE
+ #include "vial.h"
+ #endif
+@@ -85,9 +90,9 @@
+ // EEPROM is invalid and use/save defaults.
+ bool via_eeprom_is_valid(void) {
+ #ifdef VIAL_ENABLE
+-    uint8_t magic0 = BUILD_ID & 0xFF;
+-    uint8_t magic1 = (BUILD_ID >> 8) & 0xFF;
+-    uint8_t magic2 = (BUILD_ID >> 16) & 0xFF;
++    uint8_t magic0 = VIAL_EEPROM_BUILD_ID & 0xFF;
++    uint8_t magic1 = (VIAL_EEPROM_BUILD_ID >> 8) & 0xFF;
++    uint8_t magic2 = (VIAL_EEPROM_BUILD_ID >> 16) & 0xFF;
+ #else
+     char *  p      = QMK_BUILDDATE; // e.g. "2019-11-05-11:29:54"
+     uint8_t magic0 = ((p[2] & 0x0F) << 4) | (p[3] & 0x0F);
+@@ -102,9 +107,9 @@
+ // Keyboard level code (eg. via_init_kb()) should not call this
+ void via_eeprom_set_valid(bool valid) {
+ #ifdef VIAL_ENABLE
+-    uint8_t magic0 = BUILD_ID & 0xFF;
+-    uint8_t magic1 = (BUILD_ID >> 8) & 0xFF;
+-    uint8_t magic2 = (BUILD_ID >> 16) & 0xFF;
++    uint8_t magic0 = VIAL_EEPROM_BUILD_ID & 0xFF;
++    uint8_t magic1 = (VIAL_EEPROM_BUILD_ID >> 8) & 0xFF;
++    uint8_t magic2 = (VIAL_EEPROM_BUILD_ID >> 16) & 0xFF;
+ #else
+     char *  p      = QMK_BUILDDATE; // e.g. "2019-11-05-11:29:54"
+     uint8_t magic0 = ((p[2] & 0x0F) << 4) | (p[3] & 0x0F);

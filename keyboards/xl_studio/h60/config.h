@@ -1,0 +1,5 @@
+// SPDX-License-Identifier: GPL-2.0-or-later
+#pragma once
+#define WEAR_LEVELING_LOGICAL_SIZE 4096
+#define WEAR_LEVELING_BACKING_SIZE 8192
+#define DYNAMIC_KEYMAP_LAYER_COUNT 4
